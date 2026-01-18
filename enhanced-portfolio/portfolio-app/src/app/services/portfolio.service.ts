@@ -24,14 +24,14 @@ export class PortfolioService {
       { name: 'SASS', image: 'images/sass.png', level: 80, category: 'frontend' },
       { name: 'Angular', image: 'images/angular.png', level: 90, category: 'frontend' },
       { name: 'React', image: 'images/react.png', level: 75, category: 'frontend' },
-      
+
       // Backend Skills
       { name: 'Java', image: 'images/java.png', level: 80, category: 'backend' },
       { name: 'Spring', image: 'images/spring.png', level: 75, category: 'backend' },
       { name: 'Spring Boot', image: 'images/Spring_Boot.png', level: 78, category: 'backend' },
       { name: 'PostgreSQL', image: 'images/postrgressql.png', level: 70, category: 'backend' },
       { name: 'MongoDB', image: 'images/mongo-db.png', level: 72, category: 'backend' },
-      
+
       // Tools
       { name: 'Git', image: 'images/git.png', level: 85, category: 'tools' },
       { name: 'Docker', image: 'images/docker.png', level: 65, category: 'tools' },
@@ -127,7 +127,8 @@ export class PortfolioService {
         cgpa: '8.85',
         description: 'My background in Electronics and Communication Engineering has given me strong problem-solving skills, which I now apply in UI development to write clean, organized code and create user-friendly, detail-focused interfaces.'
       }
-    ]
+    ],
+    blogPosts: []
   };
 
   private portfolioSubject = new BehaviorSubject<Portfolio>(this.portfolioData);

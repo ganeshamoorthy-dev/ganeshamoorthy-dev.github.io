@@ -3,7 +3,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PortfolioService } from '../../services/portfolio-data.service';
 import { ThemeService } from '../../services/theme.service';
+import { CookieService } from '../../services/cookie.service';
 import { PersonalInfo } from '../../models/portfolio.model';
+import { COOKIE_CONSTANTS } from '../../constants/cookie.constants';
 
 @Component({
   selector: 'app-hero',
@@ -17,12 +19,14 @@ export class HeroComponent implements OnInit, OnDestroy {
   currentRoleIndex = 0;
   currentRole = '';
   isDarkTheme$: Observable<boolean>;
+  showResume = false;
   private typingInterval: any;
   private roleInterval: any;
 
   constructor(
     private portfolioService: PortfolioService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private cookieService: CookieService
   ) {
     this.isDarkTheme$ = this.themeService.isDarkTheme();
   }
@@ -32,7 +36,18 @@ export class HeroComponent implements OnInit, OnDestroy {
       this.personalInfo = portfolio.personalInfo;
     });
     
+    // Check if resume should be visible based on cookie
+    this.checkResumeVisibility();
+    
     this.startTypingAnimation();
+  }
+
+  /**
+   * Check if resume should be visible based on cookie header
+   * Checks if a cookie key contains 'mode' or similar pattern
+   */
+  private checkResumeVisibility(): void {
+    this.showResume = this.cookieService.checkCookieKeyExists(COOKIE_CONSTANTS.RESUME_MODE_KEY);
   }
 
   ngOnDestroy(): void {
@@ -75,7 +90,7 @@ export class HeroComponent implements OnInit, OnDestroy {
     if (this.personalInfo?.resumeUrl) {
       const link = document.createElement('a');
       link.href = this.personalInfo.resumeUrl;
-      link.download = 'ganeshamoorthy-resume.pdf';
+      link.download = 'ganeshamoorthy-software-engineer.pdf';
       link.target = '_blank';
       document.body.appendChild(link);
       link.click();

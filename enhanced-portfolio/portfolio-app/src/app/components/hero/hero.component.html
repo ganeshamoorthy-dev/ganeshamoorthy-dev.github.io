@@ -71,8 +71,8 @@
         <div
           class="opacity-0 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up-delay-1700 lg:animate-fade-in-left-delay-1700">
 
-          <!-- View Resume Button - Conditional Display -->
-          @if (personalInfo?.resumeUrl) {
+          <!-- View Resume Button - Conditional Display Based on Cookie -->
+          @if (showResume && personalInfo?.resumeUrl) {
           <!-- Active Resume Button -->
           <a [href]="personalInfo?.resumeUrl" target="_blank" rel="noopener noreferrer"
             class="btn bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-none normal-case font-medium px-6 py-3 rounded-lg shadow-lg shadow-purple-500/25 hover:shadow-xl hover:shadow-purple-500/35 transform hover:scale-105 transition-all duration-300 w-full sm:w-auto h-12 flex items-center justify-center gap-2 text-sm cursor-pointer">
