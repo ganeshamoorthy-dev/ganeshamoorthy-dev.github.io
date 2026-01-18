@@ -14,8 +14,7 @@ export class PortfolioService {
       email: 'ganeshamoorthy8681@gmail.com',
       linkedin: 'https://www.linkedin.com/in/ganesha-moorthy/',
       github: 'https://github.com/Ganeshamoorthy-dev',
-      // resumeUrl: '/assets/Ganeshamoorthy-software-engineer.pdf' //commented for deployment
-      resumeUrl: ""
+      resumeUrl: '/assets/ganeshamoorthy-software-engineer.pdf'
     },
     skills: [
       // Frontend Skills
@@ -77,7 +76,7 @@ export class PortfolioService {
         technologies: ['React', 'TypeScript', 'Spring Boot', 'PostgreSQL', 'JWT'],
         category: 'web',
         liveUrl: 'https://ganesh-iam.netlify.app/',
-        githubUrl: 'https://github.com/Ganeshamoorthy-dev/spring-security-v2',
+        githubUrl: 'https://github.com/ganeshamoorthy-dev/IAM-Flow',
         featured: false
       },
       {
