@@ -71,8 +71,6 @@
         <div
           class="opacity-0 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up-delay-1700 lg:animate-fade-in-left-delay-1700">
 
-          <!-- View Resume Button - Conditional Display Based on Cookie -->
-          @if (showResume && personalInfo?.resumeUrl) {
           <!-- Active Resume Button -->
           <a [href]="personalInfo?.resumeUrl" target="_blank" rel="noopener noreferrer"
             class="btn bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-none normal-case font-medium px-6 py-3 rounded-lg shadow-lg shadow-purple-500/25 hover:shadow-xl hover:shadow-purple-500/35 transform hover:scale-105 transition-all duration-300 w-full sm:w-auto h-12 flex items-center justify-center gap-2 text-sm cursor-pointer">
@@ -81,20 +79,6 @@
             </svg>
             <span>View Resume</span>
           </a>
-          } @else {
-          <!-- Disabled Resume Button with Tooltip -->
-          <div class="tooltip tooltip-top"
-            data-tip="Sorry, the resume couldn’t be opened right now. Please try again in a moment.">
-            <button disabled
-              class="btn bg-gradient-to-r from-gray-400 to-gray-500 text-white border-none normal-case font-medium px-6 py-3 rounded-lg shadow-lg opacity-60 cursor-not-allowed w-full sm:w-auto h-12 flex items-center justify-center gap-2 text-sm">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
-              </svg>
-              <span>Resume Unavailable</span>
-            </button>
-          </div>
-          }
-
           <!-- GitHub Button -->
           <a [href]="personalInfo?.github" target="_blank" rel="noopener noreferrer"
             class="btn bg-gradient-to-r from-slate-900 via-gray-900 to-slate-800 hover:from-black hover:via-slate-900 hover:to-gray-800 text-white border-none normal-case font-medium px-6 py-3 rounded-lg shadow-lg shadow-slate-500/30 hover:shadow-xl hover:shadow-slate-500/50 transform hover:scale-105 transition-all duration-300 w-full sm:w-auto h-12 flex items-center justify-center gap-3 text-sm group">
