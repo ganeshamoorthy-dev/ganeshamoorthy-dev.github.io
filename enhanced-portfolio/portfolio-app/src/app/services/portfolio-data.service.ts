@@ -14,7 +14,7 @@ export class PortfolioService {
       email: 'ganeshamoorthy8681@gmail.com',
       linkedin: 'https://www.linkedin.com/in/ganesha-moorthy/',
       github: 'https://github.com/Ganeshamoorthy-dev',
-      resumeUrl: '/assets/Ganeshamoorthy-software-engineer.pdf'
+      resumeUrl: '/assets/Ganeshamoorthy-Software-Engineer-resume.pdf'
       // resumeUrl: ""
     },
     skills: [
