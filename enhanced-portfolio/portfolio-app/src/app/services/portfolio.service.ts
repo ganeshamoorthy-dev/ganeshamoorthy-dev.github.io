@@ -13,7 +13,7 @@ export class PortfolioService {
       description: "I'm a passionate software developer with a front-end focus, dedicated to creating engaging user experiences. I bring a user-centered approach, teamwork, and intermediate backend skills to deliver seamless functionality and innovative solutions. Let's work together to bring your project to life!",
       email: 'ganeshamoorthy8681@gmail.com',
       linkedin: 'https://www.linkedin.com/in/ganesha-moorthy/',
-      resumeUrl: '/ganeshamoorthy-resume.pdf'
+      resumeUrl: '/Ganeshamoorthy-Software-Engineer-resume.pdf'
     },
     skills: [
       // Frontend Skills
