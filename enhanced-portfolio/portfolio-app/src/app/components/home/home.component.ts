@@ -6,6 +6,7 @@ import { HeaderComponent } from '../header/header.component';
 import { HeroComponent } from '../hero/hero.component';
 import { SkillsComponent } from '../skills/skills.component';
 import { ExperienceComponent } from '../experience/experience.component';
+import { DemoShowcaseComponent } from '../demo-showcase/demo-showcase.component';
 import { ProjectsComponent } from '../projects/projects.component';
 import { CertificationsComponent } from '../certifications/certifications.component';
 import { EducationComponent } from '../education/education.component';
@@ -20,12 +21,13 @@ import { FooterComponent } from '../footer/footer.component';
     HeroComponent,
     SkillsComponent,
     ExperienceComponent,
+    DemoShowcaseComponent,
     ProjectsComponent,
     CertificationsComponent,
     EducationComponent,
     ContactComponent,
     FooterComponent
-],
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -71,7 +73,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private setupScrollListener(): void {
-    const sections = ['hero', 'skills', 'experience', 'projects', 'certifications', 'education', 'contact'];
+    const sections = ['hero', 'skills', 'experience', 'showcase', 'projects', 'certifications', 'education', 'contact'];
     
     this.scrollListener = () => {
       const scrollPosition = window.scrollY + 100;

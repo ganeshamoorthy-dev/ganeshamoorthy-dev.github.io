@@ -28,6 +28,7 @@ export class ProjectsComponent implements OnInit {
 
   categories = [
     { value: 'all', label: 'All', icon: 'apps' },
+    { value: 'ai', label: 'AI Platform', icon: 'psychology' },
     { value: 'web', label: 'Web', icon: 'web' },
     // { value: 'mobile', label: 'Mobile', icon: 'phone_android' },
     { value: 'api', label: 'APIs', icon: 'api' },
@@ -136,6 +137,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjectIcon(project: Project): string {
+    if (project.category === 'ai') return 'psychology';
     if (project.category === 'web') return 'web';
     if (project.category === 'mobile') return 'phone_android';
     if (project.category === 'api') return 'api';

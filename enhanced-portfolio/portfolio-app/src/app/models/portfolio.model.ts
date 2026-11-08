@@ -12,7 +12,57 @@ export interface Experience {
   duration: string;
   description: string[];
   current?: boolean;
-  icon?:string;
+  icon?: string;
+}
+
+export interface ShowcaseMedia {
+  title: string;
+  description: string;
+  type: 'image' | 'video';
+  url: string;
+  tag: string;
+}
+
+export interface ShowcaseCapability {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface ShowcaseVideo {
+  src: string;
+  poster?: string;
+  title: string;
+  subtitle?: string;
+}
+
+export interface FeaturedShowcase {
+  id: string;
+  badge: string;
+  titlePrefix: string;
+  titleHighlight: string;
+  subtitle: string;
+  description: string;
+  video: ShowcaseVideo;
+  gallery: ShowcaseMedia[];
+  capabilities: ShowcaseCapability[];
+  techStack: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+}
+
+export interface ProjectVideo {
+  src: string;
+  poster?: string;
+  title?: string;
+  subtitle?: string;
+}
+
+export interface ProjectMedia {
+  title: string;
+  url: string;
+  description?: string;
+  tag?: string;
 }
 
 export interface Project {
@@ -20,10 +70,13 @@ export interface Project {
   description: string;
   image: string;
   technologies: string[];
-  category?: 'web' | 'mobile' | 'api' | 'tools';
+  category?: 'web' | 'mobile' | 'api' | 'tools' | 'ai';
   liveUrl?: string;
   githubUrl?: string;
   featured?: boolean;
+  demoVideo?: ProjectVideo;
+  gallery?: ProjectMedia[];
+  highlights?: string[];
 }
 
 export interface Certification {
@@ -74,7 +127,7 @@ export interface BlogPost {
   views?: number;
   isExternal?: boolean;
   externalUrl?: string;
-  externalPlatform?: string; // e.g., 'Medium', 'Dev.to', 'Personal Blog'
+  externalPlatform?: string;
 }
 
 export interface BlogCategory {
@@ -89,6 +142,7 @@ export interface Portfolio {
   personalInfo: PersonalInfo;
   skills: Skill[];
   experience: Experience[];
+  featuredShowcase?: FeaturedShowcase;
   projects: Project[];
   certifications: Certification[];
   education: Education[];

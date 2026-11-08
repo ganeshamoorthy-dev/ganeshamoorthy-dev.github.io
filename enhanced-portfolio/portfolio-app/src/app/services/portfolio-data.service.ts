@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Portfolio, Skill, PersonalInfo, Experience, Project, Certification, BlogPost, Education } from '../models/portfolio.model';
+import { Portfolio, Skill, PersonalInfo, Experience, Project, Certification, BlogPost, Education, FeaturedShowcase } from '../models/portfolio.model';
 
 @Injectable({
   providedIn: 'root'
@@ -69,7 +69,74 @@ export class PortfolioService {
         icon: "laptop"
       }
     ],
+    featuredShowcase: {
+      id: 'showcase',
+      badge: 'Flagship Project â€¢ AI Intelligence Platform',
+      titlePrefix: 'Graph ',
+      titleHighlight: 'Guard',
+      subtitle: 'Enterprise AI Intelligence & Multi-Agent Guardrails Platform',
+      description: 'An enterprise-grade AI code intelligence and automated review platform. Compiles deterministic AST dependency graphs, calculates multi-hop blast radius, and grounds LLM reasoning to catch critical breaking changes before pull requests merge.',
+      video: {
+        src: 'assets/videos/demo.mp4',
+        poster: 'assets/images/graphguard-dashboard.png',
+        title: 'Graph Guard - AI Intelligence Platform Live Demo',
+        subtitle: ""
+      },
+      gallery: [
+             {
+          title: 'PR Intelligence & Review Dashboard',
+          description: 'Centralized observability panel tracking active review pipelines, repository health scores, architectural risk levels, and AST compilation metrics across connected repositories.',
+          type: 'image',
+          url: 'assets/images/graphguard-dashboard.png',
+          tag: 'Overview'
+        },
+        {
+          title: 'AST Pipeline & Job Execution Trace',
+          description: 'Real-time review orchestrator tracking repository cloning, syntax tree compilation, blast radius calculation, live streaming logs, and automated GitHub publication.',
+          type: 'image',
+          url: 'assets/images/graphguard-review-job.png',
+          tag: 'Pipeline & Trace'
+        },
+        {
+          title: 'Context-Aware Findings & Code Audit',
+          description: 'Line-level triage interface categorizing security vulnerabilities, logic bugs, and breaking changes with verified code evidence and automated remediation snippets.',
+          type: 'image',
+          url: 'assets/images/graphguard-ai-findings.png',
+          tag: 'Findings & Audit'
+        }
+      ],
+      capabilities: [
+        {
+          icon: 'dashboard',
+          title: 'Unified Review Intelligence Hub',
+          description: 'Monitors real-time PR review pipelines, tracks repo-wide health scores, and aggregates architectural risk metrics across connected SCM repositories.'
+        },
+        {
+          icon: 'account_tree',
+          title: 'AST Blast Radius & Dependency Graph',
+          description: 'Compiles abstract syntax trees and call hierarchies using interactive Cytoscape graphs to trace multi-hop ripple effects and breaking downstream changes.'
+        },
+        {
+          icon: 'verified',
+          title: 'Context-Grounded Code Findings',
+          description: 'Identifies security vulnerabilities, logic flaws, and regressions with line-level diff mapping, verifiable code evidence, and automated remediation fixes.'
+        }
+      ],
+      techStack: [ 'Python', 'FastAPI', 'Angular', 'TypeScript', 'ollama','AST Graphs','PostgreSQL'],
+      liveUrl: '#showcase',
+      githubUrl: 'https://github.com/Ganeshamoorthy-dev'
+    },
     projects: [
+      {
+        title: 'Graph Guard - AI Intelligence Platform',
+        description: 'An enterprise-grade AI code intelligence and automated review platform. Compiles deterministic AST dependency graphs, calculates multi-hop blast radius, and grounds LLM reasoning to catch critical breaking changes before pull requests merge.',
+        image: 'assets/images/graphguard-dashboard.png',
+        technologies: ['Python', 'FastAPI', 'Angular', 'TypeScript', 'ollama','AST Graphs','PostgreSQL'],
+        category: 'ai',
+        liveUrl: '#showcase',
+        githubUrl: '',
+        featured: true
+      },
       {
         title: 'IAM - Identity and Access Management System',
         description: 'A full-stack application for managing users and permissions using role-based access control.',
@@ -123,7 +190,7 @@ export class PortfolioService {
       // },
       // {
       //   title: 'Unify',
-      //   description: 'Developed a responsive landing page based on a UX designer’s mockup, using the Unify template as a design reference.',
+      //   description: 'Developed a responsive landing page based on a UX designerâ€™s mockup, using the Unify template as a design reference.',
       //   image: 'assets/images/unify.png',
       //   technologies: ['HTML5', 'CSS3', 'Responsive Design'],
       //   category: 'web',
@@ -233,16 +300,16 @@ Our application follows a clean architecture pattern:
 
 \`\`\`typescript
 Frontend (Angular)
-├── Components
-├── Services
-├── Models
-└── Guards
+â”œâ”€â”€ Components
+â”œâ”€â”€ Services
+â”œâ”€â”€ Models
+â””â”€â”€ Guards
 
 Backend (Spring Boot)
-├── Controllers
-├── Services
-├── Repositories
-└── Entities
+â”œâ”€â”€ Controllers
+â”œâ”€â”€ Services
+â”œâ”€â”€ Repositories
+â””â”€â”€ Entities
 \`\`\`
 
 ## Setting Up the Development Environment
@@ -349,7 +416,7 @@ ng build --configuration production
 
 ## Conclusion
 
-Building modern web applications with Angular and Spring Boot provides a robust foundation for scalable, maintainable applications. Happy coding! 🚀
+Building modern web applications with Angular and Spring Boot provides a robust foundation for scalable, maintainable applications. Happy coding! ðŸš€
         `,
         featuredImage: 'assets/images/angular.png',
         author: 'Ganesha Moorthy',
@@ -1397,6 +1464,10 @@ Building modern web applications with Angular and Spring Boot provides a robust 
 
   getPersonalInfo(): Observable<PersonalInfo> {
     return of(this.portfolioData.personalInfo);
+  }
+
+  getFeaturedShowcase(): Observable<FeaturedShowcase | undefined> {
+    return of(this.portfolioData.featuredShowcase);
   }
 
   getProjects(): Observable<Project[]> {

@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit {
     { label: 'Home', link: '#hero', icon: 'home', isRoute: false, section: 'hero' },
     { label: 'Skills', link: '#skills', icon: 'code', isRoute: false, section: 'skills' },
     { label: 'Experience', link: '#experience', icon: 'work', isRoute: false, section: 'experience' },
+    { label: 'Showcase', link: '#showcase', icon: 'smart_display', isRoute: false, section: 'showcase' },
     { label: 'Projects', link: '#projects', icon: 'folder', isRoute: false, section: 'projects' },
     { label: 'Blog', link: 'blog', icon: 'article', isRoute: true, section: 'blog' },
     { label: 'Certifications', link: '#certifications', icon: 'verified', isRoute: false, section: 'certifications' },
@@ -72,7 +73,7 @@ export class HeaderComponent implements OnInit {
       return;
     }
 
-    const sections = ['hero', 'skills', 'experience', 'projects', 'certifications', 'education', 'contact'];
+    const sections = ['hero', 'skills', 'experience', 'showcase', 'projects', 'certifications', 'education', 'contact'];
     const scrollPosition = window.scrollY + 100;
 
     for (const section of sections) {
