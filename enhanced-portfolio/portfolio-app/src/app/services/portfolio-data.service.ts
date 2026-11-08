@@ -71,10 +71,10 @@ export class PortfolioService {
     ],
     featuredShowcase: {
       id: 'showcase',
-      badge: 'Flagship Project â€¢ AI Intelligence Platform',
+      badge: 'Flagship Project • AI Intelligence Platform',
       titlePrefix: 'Graph ',
       titleHighlight: 'Guard',
-      subtitle: 'Enterprise AI Intelligence & Multi-Agent Guardrails Platform',
+      subtitle: 'Enterprise AI Code Intelligence & Automated Review Platform',
       description: 'An enterprise-grade AI code intelligence and automated review platform. Compiles deterministic AST dependency graphs, calculates multi-hop blast radius, and grounds LLM reasoning to catch critical breaking changes before pull requests merge.',
       video: {
         src: 'assets/videos/demo.mp4',
