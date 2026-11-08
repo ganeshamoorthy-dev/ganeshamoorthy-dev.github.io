@@ -1,0 +1,492 @@
+@if (showcase) {
+<section [id]="showcase.id || 'showcase'"
+  class="py-16 lg:py-24 bg-white dark:bg-[#0c031c] min-h-screen transition-all duration-500 relative overflow-hidden">
+
+  <!-- Background decorative ambient glows -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/15 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 -right-40 w-96 h-96 bg-blue-500/10 dark:bg-indigo-500/15 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-violet-500/10 dark:bg-violet-500/15 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+    <!-- Section Header (Driven from Service) -->
+    <div class="text-center mb-12 opacity-0" appScrollAnimate="animate-fade-in-up">
+      @if (showcase.badge) {
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100 dark:bg-purple-900/40 border border-purple-200 dark:border-purple-500/40 text-purple-700 dark:text-purple-300 text-xs sm:text-sm font-semibold mb-4 shadow-sm">
+        <mat-icon class="text-sm">verified</mat-icon>
+        <span>{{ showcase.badge }}</span>
+      </div>
+      }
+
+      <h2 class="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight">
+        <span class="text-gray-900 dark:text-white">{{ showcase.titlePrefix }}</span>
+        <span class="bg-gradient-to-r from-purple-600 via-indigo-500 to-cyan-500 dark:from-purple-500 dark:via-indigo-400 dark:to-cyan-400 bg-clip-text text-transparent">{{ showcase.titleHighlight }}</span>
+      </h2>
+
+      <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        {{ showcase.description }}
+      </p>
+
+      <!-- View Selector Tabs -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mt-8">
+        <button
+          (click)="setTab('video')"
+          [class]="'px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center gap-2 border ' +
+            (activeTab === 'video'
+              ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-transparent shadow-lg shadow-purple-500/25 scale-105'
+              : 'bg-gray-100 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20')">
+          <mat-icon class="text-base">play_circle</mat-icon>
+          <span>Demo Video</span>
+        </button>
+
+        @if (galleryImages.length > 0) {
+        <button
+          (click)="setTab('gallery')"
+          [class]="'px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center gap-2 border ' +
+            (activeTab === 'gallery'
+              ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-transparent shadow-lg shadow-purple-500/25 scale-105'
+              : 'bg-gray-100 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20')">
+          <mat-icon class="text-base">photo_library</mat-icon>
+          <span>Screenshots &amp; Images ({{ galleryImages.length }})</span>
+        </button>
+        }
+
+        @if (showcase.capabilities && showcase.capabilities.length > 0) {
+        <button
+          (click)="setTab('features')"
+          [class]="'px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center gap-2 border ' +
+            (activeTab === 'features'
+              ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-transparent shadow-lg shadow-purple-500/25 scale-105'
+              : 'bg-gray-100 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20')">
+          <mat-icon class="text-base">hub</mat-icon>
+          <span>Key Capabilities</span>
+        </button>
+        }
+      </div>
+    </div>
+
+    <!-- TAB 1: DEMO VIDEO PLAYER -->
+    @if (activeTab === 'video') {
+    <div class="mb-12 opacity-0" appScrollAnimate="animate-fade-in-up">
+      <div class="max-w-5xl mx-auto">
+        <!-- Main Video Card -->
+        <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-200 dark:border-purple-500/30 bg-white dark:bg-slate-950 shadow-2xl shadow-gray-200/50 dark:shadow-purple-900/20 group transition-colors duration-300">
+
+          <!-- Top Control Header / Title Bar -->
+          <div class="px-4 py-3 sm:px-6 bg-gray-100/90 dark:bg-slate-900/90 border-b border-gray-200 dark:border-purple-500/20 flex items-center justify-between flex-wrap gap-2 transition-colors duration-300">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+              </div>
+              <span class="text-xs sm:text-sm font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+                <mat-icon class="text-purple-600 dark:text-purple-400 text-base">smart_display</mat-icon>
+                {{ showcase.video.title }}
+              </span>
+            </div>
+
+            <!-- Header actions -->
+            <div class="flex items-center gap-2">
+              <button
+                (click)="openTheaterMode()"
+                title="Expand to Theater View"
+                class="px-2.5 py-1 text-xs font-medium rounded-lg bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-700 shadow-sm transition-all flex items-center gap-1">
+                <mat-icon class="text-xs">fullscreen</mat-icon>
+                <span class="hidden sm:inline">Theater</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Video Viewport -->
+          <div class="relative aspect-video w-full bg-slate-950 flex items-center justify-center overflow-hidden cursor-pointer"
+            (click)="togglePlay()">
+
+            <video
+              #videoElement
+              [src]="videoSrc"
+              [poster]="videoPoster"
+              playsinline
+              preload="metadata"
+              (timeupdate)="onTimeUpdate()"
+              (loadedmetadata)="onLoadedMetadata()"
+              (ended)="onVideoEnded()"
+              (error)="onVideoError($event)"
+              class="w-full h-full object-contain bg-black">
+              Your browser does not support HTML5 video.
+            </video>
+
+            <!-- Center Big Play Button Overlay -->
+            @if (!isPlaying && !videoHasError) {
+            <div class="absolute inset-0 bg-slate-900/20 dark:bg-black/40 backdrop-blur-[2px] flex items-center justify-center transition-all duration-300">
+              <button
+                (click)="$event.stopPropagation(); togglePlay()"
+                aria-label="Play Demo Video"
+                class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-purple-600 via-indigo-600 to-cyan-500 p-1 shadow-2xl shadow-purple-500/50 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center group/btn">
+                <div class="w-full h-full rounded-full bg-white/95 dark:bg-slate-950/85 backdrop-blur-md shadow-inner flex items-center justify-center transition-colors duration-300">
+                  <mat-icon class="text-purple-600 dark:text-white text-4xl sm:text-5xl ml-1 group-hover/btn:scale-110 transition-colors">play_arrow</mat-icon>
+                </div>
+              </button>
+            </div>
+            }
+
+            <!-- Graceful Fallback if Video file is pending or loading -->
+            @if (videoHasError) {
+            <div class="absolute inset-0 bg-white/95 dark:bg-slate-950/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center transition-colors duration-300"
+              (click)="$event.stopPropagation()">
+              <div class="w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-900/40 border border-purple-200 dark:border-purple-500/30 flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400">
+                <mat-icon class="text-3xl">smart_display</mat-icon>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">{{ showcase.titlePrefix }}{{ showcase.titleHighlight }} Demo Walkthrough</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-300 max-w-md mb-6 leading-relaxed">
+                The demonstration video is currently being prepared for streaming. You can explore the platform screenshots and architecture diagrams in the meantime.
+              </p>
+              @if (galleryImages.length > 0) {
+              <button
+                (click)="setTab('gallery')"
+                class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium text-sm shadow-lg shadow-purple-500/30 hover:scale-105 transition-all flex items-center gap-2">
+                <mat-icon class="text-base">photo_library</mat-icon>
+                View Screenshots &amp; Architecture
+              </button>
+              }
+            </div>
+            }
+          </div>
+
+          <!-- Video Controls Bar (Adaptive Light / Dark Mode) -->
+          <div class="px-4 py-3 bg-white/95 dark:bg-slate-900/95 border-t border-gray-200 dark:border-purple-500/20 text-gray-800 dark:text-white transition-colors duration-300"
+            (click)="$event.stopPropagation()">
+
+            <!-- Progress Bar / Scrubber -->
+            <div class="relative w-full mb-3 flex items-center">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                step="0.1"
+                [value]="progressPercent"
+                (input)="seekVideo($event)"
+                class="w-full h-1.5 bg-gray-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-purple-600 dark:accent-purple-500 hover:h-2.5 transition-all" />
+            </div>
+
+            <!-- Controls Row -->
+            <div class="flex items-center justify-between flex-wrap gap-2 text-xs sm:text-sm">
+              <!-- Left controls: Play, Time, Volume -->
+              <div class="flex items-center gap-3 sm:gap-4">
+                <button
+                  (click)="togglePlay()"
+                  [attr.aria-label]="isPlaying ? 'Pause' : 'Play'"
+                  class="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-600/30 hover:bg-purple-600 hover:text-white text-purple-700 dark:text-white flex items-center justify-center transition-colors">
+                  <mat-icon class="text-lg">{{ isPlaying ? 'pause' : 'play_arrow' }}</mat-icon>
+                </button>
+
+                <span class="text-gray-600 dark:text-gray-300 font-mono text-xs">
+                  {{ formatTime(currentTime) }} / {{ formatTime(duration) }}
+                </span>
+
+                <div class="flex items-center gap-1.5 group/vol">
+                  <button
+                    (click)="toggleMute()"
+                    [attr.aria-label]="isMuted ? 'Unmute' : 'Mute'"
+                    class="text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white transition-colors">
+                    <mat-icon class="text-base">{{ isMuted || volume === 0 ? 'volume_off' : (volume > 0.5 ? 'volume_up' : 'volume_down') }}</mat-icon>
+                  </button>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    [value]="isMuted ? 0 : volume"
+                    (input)="setVolume($event)"
+                    class="w-14 sm:w-20 h-1 bg-gray-200 dark:bg-slate-700 rounded appearance-none cursor-pointer accent-purple-600 dark:accent-purple-500" />
+                </div>
+              </div>
+
+              <!-- Right controls: Speed, Theater, Fullscreen -->
+              <div class="flex items-center gap-2 sm:gap-3">
+                <div class="relative">
+                  <button
+                    (click)="toggleSpeedMenu()"
+                    class="px-2 py-1 rounded bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-transparent text-xs font-medium flex items-center gap-1 transition-colors">
+                    <span>{{ playbackSpeed }}x</span>
+                    <mat-icon class="text-xs">expand_more</mat-icon>
+                  </button>
+
+                  @if (showSpeedMenu) {
+                  <div class="absolute bottom-full right-0 mb-2 py-1 bg-white dark:bg-slate-900 border border-gray-200 dark:border-purple-500/30 rounded-lg shadow-xl z-30 min-w-[70px]">
+                    @for (speed of availableSpeeds; track speed) {
+                    <button
+                      (click)="changePlaybackSpeed(speed)"
+                      [class]="'w-full px-3 py-1 text-left text-xs transition-colors ' +
+                        (playbackSpeed === speed
+                          ? 'text-purple-600 dark:text-purple-400 font-bold bg-purple-50 dark:bg-purple-900/30'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-800')">
+                      {{ speed }}x
+                    </button>
+                    }
+                  </div>
+                  }
+                </div>
+
+                <button
+                  (click)="openTheaterMode()"
+                  title="Theater Mode"
+                  class="p-1.5 rounded-lg text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
+                  <mat-icon class="text-base">aspect_ratio</mat-icon>
+                </button>
+
+                <button
+                  (click)="requestNativeFullscreen()"
+                  title="Fullscreen"
+                  class="p-1.5 rounded-lg text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
+                  <mat-icon class="text-base">fullscreen</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video summary Bar -->
+         <!-- We dont need this sicne we are giving all information on top-->
+        <!-- <div class="mt-6 flex flex-wrap items-center justify-between gap-4 p-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-gray-200 dark:border-purple-500/20 shadow-md transition-colors duration-300">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white shadow-md">
+              <mat-icon class="text-xl">psychology</mat-icon>
+            </div>
+            <div>
+              <h4 class="font-bold text-gray-900 dark:text-white text-base">{{ showcase.video.title }}</h4>
+              <p class="text-xs text-gray-600 dark:text-gray-400">
+                {{ showcase.video.subtitle }}
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            @if (galleryImages.length > 0) {
+            <button
+              (click)="setTab('gallery')"
+              class="px-4 py-2 rounded-xl text-xs font-semibold bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/40 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-all flex items-center gap-1.5">
+              <mat-icon class="text-sm">photo_library</mat-icon>
+              View Screenshots
+            </button>
+            }
+          </div>
+        </div> -->
+      </div>
+    </div>
+    }
+
+    <!-- TAB 2: SCREENSHOTS & GALLERY -->
+    @if (activeTab === 'gallery') {
+    <div class="mb-12 opacity-0" appScrollAnimate="animate-fade-in-up">
+      <div class="mb-6">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Screenshots &amp; Visual Overview</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400">Click any image to view in enlarged lightbox view.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (item of galleryImages; track item.title; let i = $index) {
+        <div
+          (click)="openImageModal(i)"
+          class="group rounded-2xl overflow-hidden bg-white dark:bg-slate-900/60 border border-gray-200 dark:border-purple-500/20 hover:border-purple-500/50 shadow-md hover:shadow-xl dark:hover:shadow-purple-500/10 transition-all duration-300 cursor-pointer flex flex-col">
+
+          <div class="relative aspect-video overflow-hidden bg-gray-100 dark:bg-slate-950">
+            <img
+              [src]="item.url"
+              [alt]="item.title"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+
+            <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 dark:bg-slate-950/80 backdrop-blur-md border border-gray-200 dark:border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-semibold shadow-sm">
+              {{ item.tag }}
+            </div>
+
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div class="px-4 py-2 rounded-xl bg-purple-600 text-white font-medium text-xs flex items-center gap-1.5 shadow-lg">
+                <mat-icon class="text-sm">zoom_in</mat-icon>
+                View Fullscreen
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-gray-900 dark:text-white text-base mb-1.5 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                {{ item.title }}
+              </h4>
+              <p class="text-xs text-gray-600 dark:text-gray-300 line-clamp-2">
+                {{ item.description }}
+              </p>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-gray-100 dark:border-slate-800 flex items-center justify-between text-xs text-purple-600 dark:text-purple-400 font-medium">
+              <span>Inspect details</span>
+              <mat-icon class="text-sm group-hover:translate-x-1 transition-transform">arrow_forward</mat-icon>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    }
+
+    <!-- TAB 3: KEY CAPABILITIES -->
+    @if (activeTab === 'features' && showcase.capabilities) {
+    <div class="mb-12 opacity-0" appScrollAnimate="animate-fade-in-up">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        @for (cap of showcase.capabilities; track cap.title) {
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-gray-200 dark:border-purple-500/20 hover:border-purple-500/50 shadow-md hover:shadow-xl transition-all duration-300 flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white flex-shrink-0 shadow-md">
+            <mat-icon class="text-2xl">{{ cap.icon }}</mat-icon>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">{{ cap.title }}</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{{ cap.description }}</p>
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- Overview Callout Box -->
+      <div class="p-8 rounded-3xl bg-gradient-to-br from-purple-50 via-white to-indigo-50 dark:from-purple-900/30 dark:via-slate-900/80 dark:to-indigo-900/30 border border-purple-200 dark:border-purple-500/30 shadow-xl dark:shadow-2xl backdrop-blur-xl transition-colors duration-300">
+        <div class="max-w-3xl">
+          <span class="text-xs font-bold text-purple-600 dark:text-cyan-400 tracking-wider uppercase mb-2 block">{{ showcase.subtitle }}</span>
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">{{ showcase.titlePrefix }}{{ showcase.titleHighlight }}</h3>
+          <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+            {{ showcase.description }}
+          </p>
+
+          <div class="flex flex-wrap gap-3">
+            <button
+              (click)="setTab('video')"
+              class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium text-sm shadow-lg hover:scale-105 transition-all flex items-center gap-2">
+              <mat-icon class="text-sm">play_arrow</mat-icon>
+              Watch Video Demo
+            </button>
+            @if (galleryImages.length > 0) {
+            <button
+              (click)="setTab('gallery')"
+              class="px-5 py-2.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-800 dark:text-gray-200 font-medium text-sm border border-gray-300 dark:border-gray-700 transition-all flex items-center gap-2 shadow-sm">
+              <mat-icon class="text-sm">photo_size_select_actual</mat-icon>
+              View Screenshots
+            </button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+
+    <!-- Tech Stack Chips -->
+    @if (showcase.techStack && showcase.techStack.length > 0) {
+    <div class="mb-12 opacity-0" appScrollAnimate="animate-fade-in-up">
+      <div class="text-center mb-4">
+        <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 tracking-wider uppercase">Built With Modern Full-Stack Technologies</span>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-2 max-w-4xl mx-auto">
+        @for (tech of showcase.techStack; track tech) {
+        <span class="px-3.5 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800/80 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-purple-500/20 shadow-sm hover:border-purple-400 hover:text-purple-600 dark:hover:text-purple-300 transition-colors">
+          {{ tech }}
+        </span>
+        }
+      </div>
+    </div>
+    }
+
+  </div>
+
+  <!-- THEATER MODE VIDEO MODAL -->
+  @if (isTheaterMode) {
+  <div class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-2 sm:p-6 animate-fade-in">
+    <button
+      (click)="closeTheaterMode()"
+      aria-label="Close Theater Mode"
+      class="absolute top-4 right-4 z-50 w-11 h-11 rounded-full bg-slate-800/80 hover:bg-slate-700 text-white flex items-center justify-center border border-gray-700 transition-all hover:scale-110">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="w-full max-w-6xl aspect-video relative rounded-2xl overflow-hidden bg-black shadow-2xl border border-purple-500/30">
+      <video
+        #theaterVideoElement
+        [src]="videoSrc"
+        controls
+        autoplay
+        playsinline
+        (timeupdate)="onTimeUpdate()"
+        class="w-full h-full object-contain">
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+
+    <div class="mt-4 text-center text-gray-300 text-xs">
+      Press <kbd class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700">ESC</kbd> or click Close to return to page
+    </div>
+  </div>
+  }
+
+  <!-- IMAGE LIGHTBOX / GALLERY MODAL -->
+  @if (isImageModalOpen && galleryImages.length > 0) {
+  <div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center p-3 sm:p-6 animate-fade-in"
+    (click)="closeImageModal()">
+
+    <button
+      (click)="closeImageModal()"
+      aria-label="Close Lightbox"
+      class="absolute top-4 right-4 z-50 w-11 h-11 rounded-full bg-white dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 text-gray-800 dark:text-white flex items-center justify-center border border-gray-300 dark:border-gray-700 shadow-lg transition-all hover:scale-110">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div
+      (click)="$event.stopPropagation()"
+      class="relative w-full max-w-5xl max-h-[90vh] bg-white dark:bg-slate-900 border border-gray-200 dark:border-purple-500/30 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl flex flex-col transition-colors duration-300">
+
+      <!-- Header -->
+      <div class="px-6 py-4 bg-gray-50 dark:bg-slate-950 border-b border-gray-200 dark:border-slate-800 flex items-center justify-between transition-colors duration-300">
+        <div>
+          <span class="text-xs text-purple-600 dark:text-purple-400 font-semibold uppercase tracking-wider">
+            {{ galleryImages[selectedImageIndex].tag }} • {{ selectedImageIndex + 1 }} of {{ galleryImages.length }}
+          </span>
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white">{{ galleryImages[selectedImageIndex].title }}</h3>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button
+            (click)="prevImage()"
+            aria-label="Previous Image"
+            class="w-9 h-9 rounded-lg bg-gray-100 hover:bg-purple-600 hover:text-white dark:bg-slate-800 dark:hover:bg-purple-600 text-gray-700 dark:text-white flex items-center justify-center transition-colors">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <button
+            (click)="nextImage()"
+            aria-label="Next Image"
+            class="w-9 h-9 rounded-lg bg-gray-100 hover:bg-purple-600 hover:text-white dark:bg-slate-800 dark:hover:bg-purple-600 text-gray-700 dark:text-white flex items-center justify-center transition-colors">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Image Display Area -->
+      <div class="relative flex-1 bg-gray-900 flex items-center justify-center overflow-hidden min-h-[300px] max-h-[65vh] p-2">
+        <img
+          [src]="galleryImages[selectedImageIndex].url"
+          [alt]="galleryImages[selectedImageIndex].title"
+          class="max-w-full max-h-full object-contain" />
+      </div>
+
+      <!-- Caption Footer -->
+      <div class="p-5 bg-gray-50 dark:bg-slate-950 border-t border-gray-200 dark:border-slate-800 transition-colors duration-300">
+        <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+          {{ galleryImages[selectedImageIndex].description }}
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-3 text-center text-gray-200 text-xs hidden sm:block">
+      Use <kbd class="px-1.5 py-0.5 rounded bg-black/60 border border-white/20">←</kbd> and <kbd class="px-1.5 py-0.5 rounded bg-black/60 border border-white/20">→</kbd> to navigate, <kbd class="px-1.5 py-0.5 rounded bg-black/60 border border-white/20">ESC</kbd> to exit
+    </div>
+  </div>
+  }
+
+</section>
+}
